@@ -30,15 +30,15 @@ export default class main extends Component {
                                 onPress={() => this.setState({
                                     selectedTab: 'home'
                                 })}>
-                            <Text>首页</Text>
                             <Icon name="ios-apps-outline"/>
+                            <Text>首页</Text>
                         </Button>
                         <Button active={this.state.selectedTab === 'more'}
                                 onPress={() => this.setState({
                                     selectedTab: 'more'
                                 })}>
-                            <Text>更多</Text>
                             <Icon name="ios-compass-outline"/>
+                            <Text>更多</Text>
                         </Button>
                     </FooterTab>
                 </Footer>
