@@ -18,6 +18,7 @@ import {
     RefreshControl,
 } from 'react-native';
 import Detail from './detail';
+import Banner from './components/swiper';
 
 export default class home extends Component {
     constructor(props) {
@@ -64,15 +65,15 @@ export default class home extends Component {
             advertisements: [
                 {
                     // url: 'https://img12.360buyimg.com/babel/jfs/t7498/194/2982159482/95724/7ddf2ca5/59b773aaNe4fe32e6.jpg'
-                    image: require('../res/images/ad_image_01.jpg')
+                    url: require('../res/images/ad_image_01.jpg')
                 },
                 {
                     // url: 'https://img10.360buyimg.com/babel/jfs/t8026/91/1216032048/194119/eaef445a/59b64accN676ce1f9.jpg'
-                    image: require('../res/images/ad_image_02.jpg')
+                    url: require('../res/images/ad_image_02.jpg')
                 },
                 {
                     // url: 'https://img11.360buyimg.com/babel/jfs/t9427/155/1237940095/119440/7a97ca27/59b65b92N06349ee1.jpg'
-                    image: require('../res/images/ad_image_03.jpg')
+                    url: require('../res/images/ad_image_03.jpg')
                 }
             ],
             searchText: '',
@@ -107,33 +108,7 @@ export default class home extends Component {
                 </View>
                 {/* 轮播图 */}
                 <View style={styles.advertisement}>
-                    <ScrollView ref='scrollView'
-                                horizontal={true}
-                                showHorizontalScrollIndicator={false}
-                                pagingEnabled={true}>
-                        {
-                            this.state.advertisements.map((advertisement, index) => {
-                                return (
-                                    <TouchableHighlight
-                                        key={index}
-                                        onPress={() => Alert.alert('点击了轮播图1', null, null)}>
-                                        <Image style={styles.advertisementContent}
-                                               source={advertisement.image}/>
-                                    </TouchableHighlight>
-                                );
-                            })
-                        }
-                    </ScrollView>
-                    <View style={[styles.indicator, {
-                        left: left
-                    }]}>
-                        {this.state.advertisements.map((advertisement, index) => {
-                            return (
-                                <View key={index}
-                                      style={(index === this.state.currentPage) ? styles.circleSelected : styles.circle}/>
-                            );
-                        })}
-                    </View>
+                    <Banner advertisements={this.state.advertisements}/>
                 </View>
                 {/* 商品列表 */}
                 <View style={styles.products}>
@@ -146,23 +121,6 @@ export default class home extends Component {
                 </View>
             </View>
         );
-    }
-
-    componentDidMount() {
-        this._startTimer();
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
-
-    _startTimer() {
-        this.interval = setInterval(() => {
-            let nextPage = (this.state.currentPage + 1) % 3;
-            this.setState({currentPage: nextPage});
-            const offSetX = nextPage * Dimensions.get('window').width;
-            this.refs.scrollView.scrollResponderScrollTo({x: offSetX, y: 0, animated: true});
-        }, 2000)
     }
 
     _renderRow = (rowData, sectionID, rowID) => {
