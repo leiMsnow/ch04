@@ -24,7 +24,7 @@ export default class swiper extends Component {
         return (
             <Swiper
                 loop={true}
-                height={190}
+                height={180}
                 autoplay={true}>
                 {this.state.advertisements.map((advertisement, index) => {
                     return (
@@ -42,9 +42,6 @@ export default class swiper extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
     advertisementContent: {
         width: Dimensions.get('window').width,
         height: 180,
